@@ -5,14 +5,7 @@
     <div class="col-md-4 col-md-offset-4">
 
       <h1>Sign In</h1>
-
-      @if($errors->any())
-        <div class="alert alert-danger">
-          @foreach($errors->all() as $error)
-            <p>{{ $error }}</p>
-          @endforeach
-        </div>
-      @endif
+      @include('common.errors')
 
       <form action="{{ route('user.signin') }}" method="post">
         <div class="form-group">
