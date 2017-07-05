@@ -6,7 +6,7 @@
 
     <h1>Sign Up</h1>
 
-    @if(count($errors) > 0)
+    @if($errors->any())
       <div class="alert alert-danger">
         @foreach($errors->all() as $error)
           <p>{{ $error }}</p>

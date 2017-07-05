@@ -9,6 +9,6 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller {
   public function getIndex() {
     $products = Product::all();
-    return view('shop.index',['products' => $products]);
+    return view('shop.index', ['products' => $products]);
   }
 }

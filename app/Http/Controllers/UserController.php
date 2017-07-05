@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -12,9 +13,10 @@ class UserController extends Controller
   }
 
   public function postSignup(Request $request) {
-    // if invalid implicitly return
+    // return redirect()->back() with error messages if invalid
     $this->validate($request, [
-      'email' => 'email|required|unique:users',
+      // order matters
+      'email' => 'required|email|unique:users',
       'password' => 'required|min:4'
     ]);
 
@@ -27,4 +29,28 @@ class UserController extends Controller
 
     return redirect()->route('product.index');
   }
+
+  public function getSignin() {
+    return view('user.signin');
+  }
+
+  public function postSignin(Request $request) {
+    $this->validate($request, [
+      'email' => 'required|email',
+      'password' => 'required'
+    ]);
+
+    if (Auth::attempt([
+      'email' => $request->input('email'),
+      'password' => $request->input('password'),
+    ])) {
+      return redirect()->route('user.profile');
+    }
+    return redirect()->back()->withErrors(['incorrect email or password']);
+  }
+
+  public function getProfile() {
+    return view('user.profile');
+  }
+
 }
