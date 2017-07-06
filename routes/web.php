@@ -26,6 +26,11 @@ Route::get('/shopping-cart', [
   'as' => 'product.cart.index'
 ]);
 
+Route::get('/checkout', [
+  'uses' => 'ProductController@getCheckout',
+  'as' => 'product.cart.checkout'
+]);
+
 Route::group(['prefix' => 'user'], function()
 {
   Route::group(['middleware' => 'guest'], function()

@@ -38,4 +38,14 @@ class ProductController extends Controller
     ]);
   }
 
+  public function getCheckout()
+  {
+    if (!Session::has('cart'))
+      return view('shop.cart');
+
+    $cart = new Cart(Session::get('cart'));
+    return view('shop.checkout', ['totalPrice' => $cart->totalPrice]);
+  }
+
+
 }
