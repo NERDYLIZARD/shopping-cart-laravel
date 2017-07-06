@@ -26,4 +26,16 @@ class ProductController extends Controller
     return redirect()->route('product.index');
   }
 
+  public function getCart()
+  {
+    if (!Session::has('cart'))
+      return view('shop.cart');
+
+    $cart = new Cart(Session::get('cart'));
+    return view('shop.cart', [
+      'items' => $cart->items,
+      'totalPrice' => $cart->totalPrice
+    ]);
+  }
+
 }

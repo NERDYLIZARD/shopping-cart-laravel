@@ -15,9 +15,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#">
+          <a href="{{ route('product.cart.index') }}">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
-            <span class="badge"></span>
+            @if(Session::has('cart'))
+              <span class="badge">
+                {{ Session::get('cart')->totalQty }}
+              </span>
+            @endif
           </a>
         </li>
         <li class="dropdown">
