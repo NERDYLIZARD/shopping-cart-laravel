@@ -5,6 +5,11 @@
 @endsection
 @section('content')
   <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-6 col sm-offset-3">
+      @include('common.successMessage')
+    </div>
+  </div>
+  <div class="row">
     @foreach($products as $product)
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
