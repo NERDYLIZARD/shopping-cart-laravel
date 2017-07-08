@@ -9,3 +9,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+
+# local bootstrap files
+/public/css/bootstrap.min.css
+/public/js/bootstrap.min.js
