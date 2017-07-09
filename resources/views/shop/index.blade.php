@@ -5,7 +5,7 @@
 @endsection
 @section('content')
   <div class="row">
-    <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-6">
+    <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
       @include('common.successMessage')
     </div>
   </div>
