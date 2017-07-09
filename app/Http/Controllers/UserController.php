@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -27,6 +28,9 @@ class UserController extends Controller
     ]);
     $user->save();
     Auth::login($user);
+    if (Session::has('beforeSigninUrl')) {
+      return $this->redirectToBeforeSigninUrl();
+    }
     return redirect()->route('user.profile');
   }
 
@@ -44,6 +48,10 @@ class UserController extends Controller
       'email' => $request->input('email'),
       'password' => $request->input('password'),
     ])) {
+      // conditional redirection
+      if (Session::has('beforeSigninUrl')) {
+        return $this->redirectToBeforeSigninUrl();
+      }
       return redirect()->route('user.profile');
     }
     return redirect()->back()->withErrors(['incorrect email or password']);
@@ -56,6 +64,12 @@ class UserController extends Controller
   public function getLogout() {
     Auth::logout();
     return redirect()->route('product.index');
+  }
+
+  private function redirectToBeforeSigninUrl() {
+    $beforeSigninUrl = Session::get('beforeSigninUrl');
+    Session::forget('beforeSigninUrl');
+    return redirect()->to($beforeSigninUrl);
   }
 
 }

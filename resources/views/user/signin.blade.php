@@ -17,6 +17,7 @@
           <input id="password" name="password" type="password" class="form-control">
         </div>
         <button class="btn btn-primary">Sign In</button>
+        <p>Don't have the account? <a href="{{ route('user.signup') }}">Sign Up Here!!</a></p>
         {{ csrf_field() }}
       </form>
     </div>

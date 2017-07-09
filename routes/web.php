@@ -28,12 +28,14 @@ Route::get('/shopping-cart', [
 
 Route::get('/checkout', [
   'uses' => 'ProductController@getCheckout',
-  'as' => 'product.cart.checkout'
+  'as' => 'product.cart.checkout',
+  'middleware' => 'auth'
 ]);
 
 Route::post('/checkout', [
   'uses' => 'ProductController@postCheckout',
-  'as' => 'product.cart.checkout'
+  'as' => 'product.cart.checkout',
+  'middleware' => 'auth'
 ]);
 
 Route::group(['prefix' => 'user'], function()
