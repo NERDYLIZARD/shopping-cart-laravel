@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +59,12 @@ class UserController extends Controller
   }
 
   public function getProfile() {
-    return view('user.profile');
+    $orders = Auth::user()->orders;
+    $orders->transform(function ($order) {
+      $order->cart = unserialize($order->cart);
+      return $order;
+    });
+    return view('user.profile', ['orders' => $orders]);
   }
 
   public function getLogout() {
